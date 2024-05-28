@@ -9,6 +9,8 @@ import fileUpload from "express-fileupload";
 import cors from "cors";
 import createHttpError from "http-errors";
 
+import routes from "./routes/index.js";
+
 //dotEnv config
 dotenv.config()
 
@@ -51,6 +53,8 @@ app.use(cors());
 app.get("/", (req, res) => {
     res.send("Welcome to the server");
 });
+
+app.use("/api/v1", routes);
 
 app.use(async (req, res, next) => {
     next(createHttpError.NotFound("This route does not exist."));
