@@ -2,6 +2,8 @@ import mongoose from "mongoose";
 import { Server } from "socket.io";
 
 import app from "./app.js";
+import SocketServer from "./SocketServer.js";
+
 import logger from "./configs/logger.config.js";
 
 //env variables
@@ -45,6 +47,7 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
   logger.info("socket io connected successfully.");
+  SocketServer(socket, io);
 });
 
 //handle server errors
